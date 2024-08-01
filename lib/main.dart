@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:second_app/Screens/simpleCalculatorScreen.dart';
 
 
 
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
 
-
+  home: Simple_Calculator(),
 
       debugShowCheckedModeBanner: false,
     );
