@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 class Button extends StatelessWidget {
   final String textButton;
+  final double textSize;
+  final double raduis;
   final Color colorButton;
   final Color colorText;
   final double fontSize;
@@ -9,6 +11,8 @@ class Button extends StatelessWidget {
 
   Button({
     required this.textButton,
+    required this.textSize,
+    required this.raduis,
     required this.colorText,
     required this.fontSize,
     required this.colorButton,
@@ -23,7 +27,7 @@ class Button extends StatelessWidget {
         padding: EdgeInsets.all(5),
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(50),
+            borderRadius: BorderRadius.circular(raduis),
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.5),
@@ -37,7 +41,7 @@ class Button extends StatelessWidget {
             child: Text(
               textButton,
               style: TextStyle(
-                fontSize: 30 ,
+                fontSize: textSize ,
                 fontFamily: 'Consola',
                 color: colorText,
               ),

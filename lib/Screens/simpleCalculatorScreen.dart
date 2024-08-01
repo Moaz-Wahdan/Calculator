@@ -3,6 +3,8 @@ import 'package:math_expressions/math_expressions.dart';
 import 'package:flutter/material.dart';
 import 'package:second_app/Buttons/buttonStyle.dart';
 import 'package:second_app/Screens/converterScreen.dart';
+import 'package:second_app/Screens/history.dart';
+import 'package:second_app/Screens/scientificCalculatorScreen.dart';
 
 class Simple_Calculator extends StatefulWidget {
   static const String routeName = "Calculator_Screen";
@@ -43,6 +45,7 @@ class _Simple_CalculatorState extends State<Simple_Calculator> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+
         backgroundColor: isLight ? Colors.white70 : Colors.black87,
         title: Text(
           'Calculator',
@@ -133,7 +136,14 @@ class _Simple_CalculatorState extends State<Simple_Calculator> {
                 Row(
                   children: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => HistoryScreen(history: history ,isLight: isLight,),
+                          ),
+                        );
+                      },
                       icon: Icon(Icons.history),
                       color: isLight ?   Color(0xff03346E) : Color(0xff6EACDA),
                       iconSize: 35,
@@ -155,7 +165,17 @@ class _Simple_CalculatorState extends State<Simple_Calculator> {
                       iconSize: 35,
                     ),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Scientific_Calculator( isLight: isLight,),
+                            ),
+                          );
+
+                        });
+                      },
                       icon: Icon(Icons.science),
                       color: isLight ?   Color(0xff03346E) : Color(0xff6EACDA),
                       iconSize: 35,
@@ -218,7 +238,7 @@ class _Simple_CalculatorState extends State<Simple_Calculator> {
             ),
           ),
           SizedBox(height: 5),
-          Divider(color: Colors.indigo),
+          Divider(color:  isLight ?  Colors.indigo : Color(0xff6EACDA) ,thickness: 3.5,),
           SizedBox(height: 5),
           Expanded(
             flex: 2,
@@ -230,6 +250,8 @@ class _Simple_CalculatorState extends State<Simple_Calculator> {
                 /// Clear Button
                 if (index == 0) {
                   return Button(
+                    raduis: 50,
+                    textSize: 30,
                     textButton: buttons[index],
                     colorText: Colors.white,
                     fontSize: 30,
@@ -246,6 +268,8 @@ class _Simple_CalculatorState extends State<Simple_Calculator> {
                 /// Equal Button
                 else if (index == buttons.length - 1) {
                   return Button(
+                    raduis: 50,
+                    textSize: 30,
                     textButton: buttons[index],
                     colorText: Colors.white,
                     fontSize: 20,
@@ -266,6 +290,8 @@ class _Simple_CalculatorState extends State<Simple_Calculator> {
                 /// Ans Button
                 else if (index == buttons.length - 2) {
                   return Button(
+                    raduis: 50,
+                    textSize: 30,
                     textButton: buttons[index],
                     colorText: isLight ? Colors.black : Colors.white,
                     fontSize: 20,
@@ -282,6 +308,8 @@ class _Simple_CalculatorState extends State<Simple_Calculator> {
                 /// Other Buttons
                 else {
                   return Button(
+                    raduis: 50,
+                    textSize: 30,
                     textButton: buttons[index],
                     colorText: isLight ? Colors.black : Colors.white,
                     fontSize: 20,

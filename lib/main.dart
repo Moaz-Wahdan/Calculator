@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:second_app/Screens/converterScreen.dart';
+import 'package:second_app/Screens/history.dart';
 import 'package:second_app/Screens/simpleCalculatorScreen.dart';
 import 'package:second_app/Screens/splashScreen.dart';
 
@@ -23,6 +24,19 @@ class MyApp extends StatelessWidget {
           final bool isLight = settings.arguments as bool ;
           return MaterialPageRoute(
             builder: (context) => UnitConverter(isLight: isLight),
+          );
+        }
+        if (settings.name == '/Scientific_Calculator') {
+          final bool isLight = settings.arguments as bool ;
+          return MaterialPageRoute(
+            builder: (context) => UnitConverter(isLight: isLight),
+          );
+        }
+        if (settings.name == '/history') {
+          final List<String> history = settings.arguments as List<String>;
+          final bool isLight = settings.arguments as bool ;
+          return MaterialPageRoute(
+            builder: (context) => HistoryScreen(history: history ,isLight: isLight,),
           );
         }
       },

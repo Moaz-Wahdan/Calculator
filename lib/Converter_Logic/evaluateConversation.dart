@@ -21,7 +21,6 @@ class _Unit extends State<Unit> {
     '6','7', '8', '9',
     '2', '3','4', '5',
     '0', '.', '1',  '='
-
   ];
 
   void _updateControllerText(String text) {
@@ -206,7 +205,7 @@ class _Unit extends State<Unit> {
             ),
           ),
           SizedBox(height: 5),
-          Divider(color: Colors.indigo),
+          Divider(color:  widget.isLight ?  Colors.indigo : Color(0xff6EACDA)),
           SizedBox(height: 5),
           Expanded(
             child: GridView.builder(
@@ -217,6 +216,8 @@ class _Unit extends State<Unit> {
                 /// Equal Button
                  if (index == buttons.length - 1) {
                   return Button(
+                    raduis: 50,
+                    textSize: 30,
                     textButton: buttons[index],
                     colorText: Colors.white,
                     fontSize: 20,
@@ -235,6 +236,8 @@ class _Unit extends State<Unit> {
                 /// Other Buttons
                 else {
                   return Button(
+                    raduis: 50,
+                    textSize: 30,
                     textButton: buttons[index],
                     colorText:  widget.isLight ? Colors.black : Colors.white,
                     fontSize: 20,

@@ -15,7 +15,6 @@ class UnitConverter extends StatefulWidget {
     'Square Feet',
     'Square Yards'
   ];
-
   List<String> lengthUnits = [
     'Select Unit',
     'Millimeters',
@@ -28,14 +27,12 @@ class UnitConverter extends StatefulWidget {
     'Miles',
     'Nautical Miles'
   ];
-
   List<String> temperatureUnits = [
     'Select Unit',
     'Celsius',
     'Fahrenheit',
     'Kelvin'
   ];
-
   List<String> volumeUnits = [
     'Select Unit',
     'Liters',
@@ -47,7 +44,6 @@ class UnitConverter extends StatefulWidget {
     'Cups',
     'Fluid Ounces'
   ];
-
   List<String> massUnits = [
     'Select Unit',
     'Kilograms',
@@ -57,7 +53,6 @@ class UnitConverter extends StatefulWidget {
     'Tons',
     'Stones'
   ];
-
   List<String> dataUnits = [
     'Select Unit',
     'Bytes',
@@ -68,7 +63,6 @@ class UnitConverter extends StatefulWidget {
     'Petabytes',
     'Bits'
   ];
-
   List<String> speedUnits = [
     'Select Unit',
     'Meters per second',
@@ -77,7 +71,6 @@ class UnitConverter extends StatefulWidget {
     'Knots',
     'Feet per second'
   ];
-
   List<String> timeUnits = [
     'Select Unit',
     'Seconds',
