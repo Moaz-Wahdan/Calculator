@@ -2,6 +2,7 @@ import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:math_expressions/math_expressions.dart';
 import 'package:flutter/material.dart';
 import 'package:second_app/Buttons/buttonStyle.dart';
+import 'package:second_app/Screens/converterScreen.dart';
 
 class Simple_Calculator extends StatefulWidget {
   static const String routeName = "Calculator_Screen";
@@ -98,6 +99,7 @@ class _Simple_CalculatorState extends State<Simple_Calculator> {
                 padding: EdgeInsets.fromLTRB(20, 15, 0, 15),
                 alignment: Alignment.centerLeft,
                 child: TextField(
+                  cursorColor: isLight ? Colors.black : Colors.white ,
                   autofocus: true,
                   controller: _controller,
                   readOnly: true,
@@ -137,7 +139,17 @@ class _Simple_CalculatorState extends State<Simple_Calculator> {
                       iconSize: 35,
                     ),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => UnitConverter(isLight: isLight,),
+                            ),
+                          );
+
+                        });
+                      },
                       icon: Icon(Icons.swap_horizontal_circle),
                       color: isLight ?   Color(0xff03346E) : Color(0xff6EACDA),
                       iconSize: 35,
@@ -295,16 +307,6 @@ class _Simple_CalculatorState extends State<Simple_Calculator> {
       ),
     );
   }
-}
-
-bool IsOperator(String buttonText) {
-  return buttonText == '*' ||
-      buttonText == '/' ||
-      buttonText == '+' ||
-      buttonText == '-' ||
-      buttonText == '=' ||
-      buttonText == '(' ||
-      buttonText == ')';
 }
 
 double evaluateMathExpression(String expression) {

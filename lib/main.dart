@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:second_app/Screens/converterScreen.dart';
 import 'package:second_app/Screens/simpleCalculatorScreen.dart';
 import 'package:second_app/Screens/splashScreen.dart';
 
@@ -16,6 +17,14 @@ class MyApp extends StatelessWidget {
       routes: {
         Simple_Calculator.routeName : (buildContext) => Simple_Calculator(),
         SplashScreen.routeName : (buildContext)=>SplashScreen(),
+      },
+      onGenerateRoute: (settings) {
+        if (settings.name == '/UnitConverter') {
+          final bool isLight = settings.arguments as bool ;
+          return MaterialPageRoute(
+            builder: (context) => UnitConverter(isLight: isLight),
+          );
+        }
       },
       debugShowCheckedModeBanner: false,
     );
