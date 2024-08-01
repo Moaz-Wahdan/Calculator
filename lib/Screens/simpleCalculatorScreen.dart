@@ -6,7 +6,7 @@ import 'package:second_app/Buttons/buttonStyle.dart';
 class Simple_Calculator extends StatefulWidget {
   static const String routeName = "Calculator_Screen";
 
-  Simple_Calculator({super.key});
+  const Simple_Calculator({super.key});
 
   @override
   State<Simple_Calculator> createState() => _Simple_CalculatorState();
