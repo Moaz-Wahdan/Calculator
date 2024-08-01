@@ -102,7 +102,7 @@ class _Simple_CalculatorState extends State<Simple_Calculator> {
                   controller: _controller,
                   readOnly: true,
                   showCursor: true,
-                  style: TextStyle(fontSize: 30.0, color: Colors.deepPurple),
+                  style: TextStyle(fontSize: 20.0, color:  isLight ? Colors.black : Colors.white ),
                   decoration: InputDecoration(
                     border: InputBorder.none,
                   ),
@@ -119,7 +119,7 @@ class _Simple_CalculatorState extends State<Simple_Calculator> {
                 alignment: Alignment.centerRight,
                 child: Text(
                   result,
-                  style: TextStyle(fontSize: 25),
+                  style: TextStyle(  fontSize: 30  ,  color:  isLight ? Colors.black : Colors.white),
                 ),
               ),
             ],
