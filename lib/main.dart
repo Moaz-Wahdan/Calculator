@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:second_app/Screens/simpleCalculatorScreen.dart';
 
-
-
-void main() {
-  runApp(const MyApp());
-}
+void main() { runApp(const MyApp()); }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
