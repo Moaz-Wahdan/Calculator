@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:second_app/Screens/converterScreen.dart';
 import 'package:second_app/Screens/history.dart';
+import 'package:second_app/Screens/scientificCalculatorScreen.dart';
 import 'package:second_app/Screens/simpleCalculatorScreen.dart';
 import 'package:second_app/Screens/splashScreen.dart';
 
@@ -16,7 +17,6 @@ class MyApp extends StatelessWidget {
       title: 'Calculator App',
       initialRoute: SplashScreen.routeName,
       routes: {
-        Simple_Calculator.routeName : (buildContext) =>Simple_Calculator(),
         SplashScreen.routeName : (buildContext)=>SplashScreen(),
       },
       onGenerateRoute: (settings) {
@@ -28,15 +28,23 @@ class MyApp extends StatelessWidget {
         }
         if (settings.name == '/Scientific_Calculator') {
           final bool isLight = settings.arguments as bool ;
+          final String oldValue = settings.arguments as String ;
           return MaterialPageRoute(
-            builder: (context) => UnitConverter(isLight: isLight),
+            builder: (context) => Scientific_Calculator(isLight: isLight ,oldValue: oldValue,),
+          );
+        }
+        if (settings.name == '/Simple_Calculator') {
+          final String oldValue = settings.arguments as String ;
+          return MaterialPageRoute(
+            builder: (context) => Simple_Calculator(oldValue: '',),
           );
         }
         if (settings.name == '/history') {
           final List<String> history = settings.arguments as List<String>;
           final bool isLight = settings.arguments as bool ;
+          final String fromScreen = settings.arguments as String ;
           return MaterialPageRoute(
-            builder: (context) => HistoryScreen(history: history ,isLight: isLight,),
+            builder: (context) => HistoryScreen(history: history ,isLight: isLight,fromScreen: fromScreen,),
           );
         }
         return null;

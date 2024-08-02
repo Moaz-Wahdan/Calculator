@@ -8,8 +8,9 @@ import 'package:second_app/Screens/scientificCalculatorScreen.dart';
 
 class Simple_Calculator extends StatefulWidget {
   static const String routeName = "Calculator_Screen";
+  String oldValue ;
 
-  const Simple_Calculator({super.key});
+   Simple_Calculator({super.key, required this.oldValue});
 
   @override
   State<Simple_Calculator> createState() => _Simple_CalculatorState();
@@ -44,9 +45,12 @@ class _Simple_CalculatorState extends State<Simple_Calculator> {
 
   @override
   Widget build(BuildContext context) {
+    if( widget.oldValue != '' ){
+  expression = widget.oldValue;
+  _updateControllerText(expression);
+  }
     return Scaffold(
       appBar: AppBar(
-
         backgroundColor: isLight ? Colors.white70 : Colors.black87,
         title: Text(
           'Calculator',
@@ -141,7 +145,7 @@ class _Simple_CalculatorState extends State<Simple_Calculator> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => HistoryScreen(history: history ,isLight: isLight,),
+                            builder: (context) => HistoryScreen(history: history ,isLight: isLight,fromScreen: 'Simple'),
                           ),
                         );
                       },
@@ -171,7 +175,7 @@ class _Simple_CalculatorState extends State<Simple_Calculator> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => Scientific_Calculator( isLight: isLight,),
+                              builder: (context) => Scientific_Calculator( isLight: isLight,oldValue: '',),
                             ),
                           );
 
@@ -300,6 +304,7 @@ class _Simple_CalculatorState extends State<Simple_Calculator> {
                     colorButton:  isLight ? Color(0xff9DD9EE) : Color(0xff164555),
                     onClicked: () {
                       setState(() {
+                        widget.oldValue = '';
                         expression = '';
                         expression += result;
                         _updateControllerText(result);
@@ -320,6 +325,7 @@ class _Simple_CalculatorState extends State<Simple_Calculator> {
                     onClicked: () {
                       setState(() {
                         if (equalFlag== true && ansFlag == false) {
+                          widget.oldValue = '';
                           expression = '';
                           result = '';
                           _updateControllerText(expression);
@@ -327,6 +333,7 @@ class _Simple_CalculatorState extends State<Simple_Calculator> {
                         }
                         expression += buttons[index] ;
                         _updateControllerText(expression);
+                        widget.oldValue = '';
                       });
                     },
                   );

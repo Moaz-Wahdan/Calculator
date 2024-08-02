@@ -9,7 +9,8 @@ import 'package:second_app/Screens/history.dart';
 class Scientific_Calculator extends StatefulWidget {
   static const String routeName = "Scientific_Calculator";
   bool isLight ;
-   Scientific_Calculator({super.key , required this.isLight});
+  String oldValue ;
+   Scientific_Calculator({super.key , required this.isLight , required this.oldValue});
 
   @override
   State<Scientific_Calculator> createState() => _Scientific_CalculatorState();
@@ -47,6 +48,10 @@ class _Scientific_CalculatorState extends State<Scientific_Calculator> {
 
   @override
   Widget build(BuildContext context) {
+    if( widget.oldValue != '' ){
+      expression = widget.oldValue;
+      _updateControllerText(expression);
+    }
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(
@@ -109,7 +114,7 @@ class _Scientific_CalculatorState extends State<Scientific_Calculator> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => HistoryScreen(history: history ,isLight: widget.isLight,),
+                        builder: (context) => HistoryScreen(history: history ,isLight: widget.isLight,fromScreen: 'Scientific',),
                       ),
                     );
                   },
@@ -231,7 +236,6 @@ class _Scientific_CalculatorState extends State<Scientific_Calculator> {
                           result = (evaluateExpression(expression).toStringAsFixed(3));
                           history.add(expression + ' = ' + result);
                           equalFlag = true;
-                          ansFlag = false ;
                         } catch (e) {
                           result = 'Error';
                         }
@@ -253,6 +257,7 @@ class _Scientific_CalculatorState extends State<Scientific_Calculator> {
                         expression = '';
                         expression += result;
                         _updateControllerText(result);
+                        widget.oldValue = '';
                       });
                     },
                   );
@@ -276,6 +281,7 @@ class _Scientific_CalculatorState extends State<Scientific_Calculator> {
                         }
                         expression += buttons[index] ;
                         _updateControllerText(expression);
+                        widget.oldValue = '';
                       });
                     },
                   );
@@ -344,8 +350,6 @@ class _Scientific_CalculatorState extends State<Scientific_Calculator> {
 
     userInput = userInput.replaceAllMapped(RegExp(r'asinh\((\d+(\.\d+)?)\)'), (match) {
       double value = double.parse(match.group(1)!);
-      print('CCCCCCCCCCCCCCCCCCCCCCCCCC');
-
       return '${asinh(value)}';
     });
 
