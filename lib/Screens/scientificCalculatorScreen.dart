@@ -254,10 +254,11 @@ class _Scientific_CalculatorState extends State<Scientific_Calculator> {
                     colorButton:   widget.isLight ? Color(0xff9DD9EE) : Color(0xff164555),
                     onClicked: () {
                       setState(() {
+                        widget.oldValue = '';
                         expression = '';
                         expression += result;
                         _updateControllerText(result);
-                        widget.oldValue = '';
+                        ansFlag = true ;
                       });
                     },
                   );
@@ -274,6 +275,7 @@ class _Scientific_CalculatorState extends State<Scientific_Calculator> {
                     onClicked: () {
                       setState(() {
                         if (equalFlag== true && ansFlag == false) {
+                          widget.oldValue = '';
                           expression = '';
                           result = '';
                           _updateControllerText(expression);
@@ -281,7 +283,7 @@ class _Scientific_CalculatorState extends State<Scientific_Calculator> {
                         }
                         expression += buttons[index] ;
                         _updateControllerText(expression);
-                        widget.oldValue = '';
+
                       });
                     },
                   );

@@ -333,7 +333,7 @@ class _Simple_CalculatorState extends State<Simple_Calculator> {
                         }
                         expression += buttons[index] ;
                         _updateControllerText(expression);
-                        widget.oldValue = '';
+
                       });
                     },
                   );
