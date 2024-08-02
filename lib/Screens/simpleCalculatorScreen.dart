@@ -326,7 +326,6 @@ class _Simple_CalculatorState extends State<Simple_Calculator> {
                           equalFlag = false;
                         }
                         expression += buttons[index] ;
-
                         _updateControllerText(expression);
                       });
                     },

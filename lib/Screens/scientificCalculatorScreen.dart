@@ -20,6 +20,7 @@ class _Scientific_CalculatorState extends State<Scientific_Calculator> {
   final TextEditingController _controller = TextEditingController();
   String result = '', expression = '';
   bool equalFlag = false , isRad =true ;
+  bool ansFlag = false;
 
   List<String> buttons = [
     'C' ,'sinh(' ,'cosh(' ,'asinh(' ,'acosh(' ,
@@ -230,6 +231,7 @@ class _Scientific_CalculatorState extends State<Scientific_Calculator> {
                           result = (evaluateExpression(expression).toStringAsFixed(3));
                           history.add(expression + ' = ' + result);
                           equalFlag = true;
+                          ansFlag = false ;
                         } catch (e) {
                           result = 'Error';
                         }
@@ -266,7 +268,7 @@ class _Scientific_CalculatorState extends State<Scientific_Calculator> {
                     colorButton:  widget.isLight ? Color(0xff9DD9EE) : Color(0xff164555),
                     onClicked: () {
                       setState(() {
-                        if (equalFlag) {
+                        if (equalFlag== true && ansFlag == false) {
                           expression = '';
                           result = '';
                           _updateControllerText(expression);
