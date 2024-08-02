@@ -40,6 +40,7 @@ dependencies:
   animated_toggle_switch: ^0.8.2
   maths: ^0.0.2
   dropdown_button2: ^2.3.9
+  flutter_toggle_button: ^0.0.3
 
 dev_dependencies:
   flutter_test:

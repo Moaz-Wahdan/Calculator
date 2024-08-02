@@ -2,6 +2,7 @@ import 'package:math_expressions/math_expressions.dart';
 import 'package:flutter/material.dart';
 import 'package:second_app/Buttons/buttonStyle.dart';
 import 'dart:math' as math;
+import 'package:flutter_toggle_button/flutter_toggle_button.dart';
 
 import 'package:second_app/Screens/history.dart';
 
@@ -113,7 +114,25 @@ class _Scientific_CalculatorState extends State<Scientific_Calculator> {
                   },
                   icon: Icon(Icons.history),
                   color:  widget.isLight ?   Color(0xff03346E) : Color(0xff6EACDA),
-                  iconSize: 23,
+                  iconSize: 33,
+                ),
+                FlutterToggleButton(
+                  items: const ['R', 'D'],
+                  onTap: (index) {
+                    if (index == 0) {
+                      isRad = true ;
+                    }else{
+                      isRad = false ;
+                    }
+                    print(isRad);
+                  },
+                  buttonWidth: 30,
+                  buttonHeight: 30,
+                  borderRadius: 25,
+                  buttonTextFontSize: 38,
+                  buttonColor: widget.isLight ?  Color(0xff9DD9EE) : Color(0xff164555),
+                  enableTextColor: widget.isLight ?  Colors.black : Colors.white,
+                  disableTextColor:  widget.isLight ?  Colors.black : Colors.white,
                 ),
                 Row(
                   children: [
@@ -130,7 +149,7 @@ class _Scientific_CalculatorState extends State<Scientific_Calculator> {
                       },
                       icon: Icon(Icons.arrow_back_ios),
                       color:  widget.isLight ?   Color(0xff03346E) : Color(0xff6EACDA),
-                      iconSize: 23,
+                      iconSize: 33,
                     ),
                     IconButton(
                       onPressed: () {
@@ -145,7 +164,7 @@ class _Scientific_CalculatorState extends State<Scientific_Calculator> {
                       },
                       icon: Icon(Icons.arrow_forward_ios),
                       color:  widget.isLight ?   Color(0xff03346E) : Color(0xff6EACDA),
-                      iconSize: 23,
+                      iconSize: 33,
                     ),
                   ],
                 ),
@@ -165,7 +184,7 @@ class _Scientific_CalculatorState extends State<Scientific_Calculator> {
                   },
                   icon: Icon(Icons.backspace),
                   color: Colors.red,
-                  iconSize: 23,
+                  iconSize: 33,
                 ),
               ],
             ),
@@ -208,7 +227,7 @@ class _Scientific_CalculatorState extends State<Scientific_Calculator> {
                     onClicked: () {
                       setState(() {
                         try {
-                          result = evaluateMathExpression(expression).toString();
+                          result = (evaluateExpression(expression).toStringAsFixed(3));
                           history.add(expression + ' = ' + result);
                           equalFlag = true;
                         } catch (e) {
@@ -278,7 +297,7 @@ class _Scientific_CalculatorState extends State<Scientific_Calculator> {
     userInput = userInput.replaceAllMapped(RegExp(r'log_(\d+(\.\d+)?)\((\d+(\.\d+)?)\)'), (match) {
       double a = double.parse(match.group(1)!);
       double b = double.parse(match.group(3)!);
-      return '( ln($b)/ln($a) )';
+      return '(ln($b) / ln($a))';
     });
 
     // Handle constants
@@ -289,32 +308,64 @@ class _Scientific_CalculatorState extends State<Scientific_Calculator> {
     userInput = userInput.replaceAllMapped(RegExp(r'sin\((\d+(\.\d+)?)\)'), (match) {
       double value = double.parse(match.group(1)!);
       double radians = isRad ? value : degreesToRadians(value);
-      return '${(math.sin(radians))}';
+      return '${math.sin(radians)}';
     });
 
     userInput = userInput.replaceAllMapped(RegExp(r'cos\((\d+(\.\d+)?)\)'), (match) {
       double value = double.parse(match.group(1)!);
       double radians = isRad ? value : degreesToRadians(value);
-      return  '${( math.cos(radians) )}';
+      return '${math.cos(radians)}';
     });
 
-    userInput = userInput.replaceAllMapped(RegExp(r'asin\((\d+(\.\d+)?)\)'), (match) {
-      double value = double.parse(match.group(1)!); // Corrected from group(3) to group(1)
-      double result = ( math.asin(value) );
-      return isRad ? '${( result )}' : '${( radiansToDegrees(result) )}';
+    userInput = userInput.replaceAllMapped(RegExp(r'asin\(([^)]+)\)'), (match) {
+      double value = double.parse(match.group(1)!);
+      double result = math.asin(value);
+
+      return isRad ? '$result' : '${radiansToDegrees(result)}';
     });
 
-    userInput = userInput.replaceAllMapped(RegExp(r'acos\((\d+(\.\d+)?)\)'), (match) {
-      double value = double.parse(match.group(1)!); // Corrected from group(3) to group(1)
-      double result = ( math.acos(value) );
-      return isRad ? '${( result )}' : '${( radiansToDegrees(result) )}';
+    userInput = userInput.replaceAllMapped(RegExp(r'acos\(([^)]+)\)'), (match) {
+      double value = double.parse(match.group(1)!);
+      double result = math.acos(value);
+      return isRad ? '$result' : '${radiansToDegrees(result)}';
     });
 
+    userInput = userInput.replaceAllMapped(RegExp(r'sinh\((\d+(\.\d+)?)\)'), (match) {
+      double value = double.parse(match.group(1)!);
+      return '${sinh(value)}';
+    });
+
+    userInput = userInput.replaceAllMapped(RegExp(r'cosh\((\d+(\.\d+)?)\)'), (match) {
+      double value = double.parse(match.group(1)!);
+      return '${cosh(value)}';
+    });
+
+    userInput = userInput.replaceAllMapped(RegExp(r'asinh\((\d+(\.\d+)?)\)'), (match) {
+      double value = double.parse(match.group(1)!);
+      print('CCCCCCCCCCCCCCCCCCCCCCCCCC');
+
+      return '${asinh(value)}';
+    });
+
+    userInput = userInput.replaceAllMapped(RegExp(r'acosh\((\d+(\.\d+)?)\)'), (match) {
+      double value = double.parse(match.group(1)!);
+      return '${acosh(value)}';
+    });
+
+    userInput = userInput.replaceAllMapped(RegExp(r'√\((\d+(\.\d+)?)\)'), (match) {
+      double value = double.parse(match.group(1)!);
+      return '${math.sqrt(value)}';
+    });
+
+    userInput = userInput.replaceAllMapped(RegExp(r'∛\((\d+(\.\d+)?)\)'), (match) {
+      double value = double.parse(match.group(1)!);
+      return '${math.pow(value, 1/3)}';
+    });
 
     // Evaluate the final expression
     return evaluateMathExpression(userInput);
-
   }
+
 }
 
 double degreesToRadians(double degrees) {
@@ -323,8 +374,24 @@ double degreesToRadians(double degrees) {
 double radiansToDegrees(double radian) {
   return radian * (180 / math.pi );
 }
+double manualAsin(double x, {int terms = 10}) {
+  if (x < -1 || x > 1) {
+    throw ArgumentError('The input value must be in the range [-1, 1]');
+  }
+  double result = x;
+  double term = x;
+  for (int n = 1; n < terms; n++) {
+    term *= (x * x * (2 * n - 1) * (2 * n - 1)) / ((2 * n) * (2 * n + 1));
+    result += term;
+  }
+  return result;
+}
+double manualAcos(double x, {int terms = 10}) {
+  return math.pi / 2 - manualAsin(x, terms: terms);
+}
+
 double sinh(double x) {
-  return (math.exp(x) - math.exp(-x)) / 2;
+  return ( (math.exp(x)) - (math.exp(-x)) ) / 2;
 }
 
 // Hyperbolic cosine
@@ -333,11 +400,11 @@ double cosh(double x) {
 }
 
 double asinh(double x) {
-  return math.log(x + math.sqrt(x * x + 1));
+  return math.log(x + math.sqrt((x * x) + 1));
 }
 
 double acosh(double x) {
-  return math.log(x + math.sqrt(x * x - 1));
+  return math.log( x + math.sqrt((x * x) - 1));
 }
 bool isFunction(String text){
   if(
