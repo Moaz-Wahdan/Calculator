@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'Calculator App',
       initialRoute: SplashScreen.routeName,
       routes: {
-        Simple_Calculator.routeName : (buildContext) => Simple_Calculator(),
+        Simple_Calculator.routeName : (buildContext) =>Simple_Calculator(),
         SplashScreen.routeName : (buildContext)=>SplashScreen(),
       },
       onGenerateRoute: (settings) {
@@ -39,6 +39,7 @@ class MyApp extends StatelessWidget {
             builder: (context) => HistoryScreen(history: history ,isLight: isLight,),
           );
         }
+        return null;
       },
       debugShowCheckedModeBanner: false,
     );

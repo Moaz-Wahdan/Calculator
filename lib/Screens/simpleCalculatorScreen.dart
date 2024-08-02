@@ -20,6 +20,7 @@ class _Simple_CalculatorState extends State<Simple_Calculator> {
   final TextEditingController _controller = TextEditingController();
   String result = '', expression = '';
   bool equalFlag = false;
+  bool ansFlag = false;
 
   List<String> buttons = [
     'C', '(', ')', '/',
@@ -280,6 +281,7 @@ class _Simple_CalculatorState extends State<Simple_Calculator> {
                           result = evaluateMathExpression(expression).toString();
                           history.add(expression + ' = ' + result);
                           equalFlag = true;
+                          ansFlag = false ;
                         } catch (e) {
                           result = 'Error';
                         }
@@ -301,6 +303,7 @@ class _Simple_CalculatorState extends State<Simple_Calculator> {
                         expression = '';
                         expression += result;
                         _updateControllerText(result);
+                        ansFlag = true ;
                       });
                     },
                   );
@@ -316,13 +319,14 @@ class _Simple_CalculatorState extends State<Simple_Calculator> {
                     colorButton: isLight ? Color(0xff9DD9EE) : Color(0xff164555),
                     onClicked: () {
                       setState(() {
-                        if (equalFlag) {
+                        if (equalFlag== true && ansFlag == false) {
                           expression = '';
                           result = '';
                           _updateControllerText(expression);
                           equalFlag = false;
                         }
                         expression += buttons[index] ;
+
                         _updateControllerText(expression);
                       });
                     },
